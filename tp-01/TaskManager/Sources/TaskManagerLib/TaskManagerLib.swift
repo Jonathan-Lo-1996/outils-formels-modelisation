@@ -75,6 +75,6 @@ public func createCorrectTaskManager() -> PTNet {
         transitions: [create, spawn, success, exec, fail])
 
 // Nom : Jonathan Lo
-// Date : Octobre 2017
+// Date : 8 Octobre 2017
 // TP 1
 }

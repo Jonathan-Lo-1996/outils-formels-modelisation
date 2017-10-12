@@ -116,5 +116,6 @@ let correctTaskManager = createCorrectTaskManager()
      // Donc la correction que nous avons faite nous permet d'empecher que exec ne puisse etre tire une deuxieme fois tant qu'un success ou un fail n'ait ete tire.
 
 // Nom : Jonathan Lo
+// Cours : Outils Formels De Modelisation
 // Date : 8 Octobre 2017
 // TP 1

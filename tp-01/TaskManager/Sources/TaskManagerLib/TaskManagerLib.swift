@@ -75,6 +75,7 @@ public func createCorrectTaskManager() -> PTNet {
         transitions: [create, spawn, success, exec, fail])
 
 // Nom : Jonathan Lo
+// Cours : Outils Formels De Modelisation
 // Date : 8 Octobre 2017
 // TP 1
 }

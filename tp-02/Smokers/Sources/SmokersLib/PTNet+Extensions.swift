@@ -63,6 +63,6 @@ public extension PTNet {
 // Nom : Jonathan Lo
 // Cours : Outils Formels De Modelisation
 // Date : 20 Octobre 2017
-// TP 2
+// TP2
 
 }

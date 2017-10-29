@@ -1,6 +1,8 @@
 public class MarkingGraph {
 
 // Nom : Jonathan Lo
+// Cours : Outils Formels De Modelisation
+// Date : Octobre 2017
 
     public typealias Marking = [String: Int]
 

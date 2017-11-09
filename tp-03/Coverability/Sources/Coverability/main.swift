@@ -13,3 +13,10 @@ import CoverabilityLib
 // You **are** encouraged to write tests of your own!
 // You may write as many tests as you want here, or even better in `CoverabilityLibTests.swift`.
 // Observe how the two existing tests are implemented to write your own.
+
+
+
+// Nom : Lo Jonathan
+// Cours : Outils Formels De Modelisation
+// TP 03
+// Date : Novembre 2017

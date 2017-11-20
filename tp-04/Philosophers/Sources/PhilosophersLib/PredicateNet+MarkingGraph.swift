@@ -2,6 +2,7 @@ extension PredicateNet {
 
     /// Returns the marking graph of a bounded predicate net.
     public func markingGraph(from marking: MarkingType) -> PredicateMarkingNode<T>? {
+	// Cette fonction prend en parametre un type MarkingType et retourne un type PredicateMarkingNode<T>
         // Write your code here ...
 
         // Note that I created the two static methods `equals(_:_:)` and `greater(_:_:)` to help

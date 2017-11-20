@@ -1,6 +1,6 @@
 import PetriKit
 import PhilosophersLib
-
+// L'exemple est celui du cours slide 29
 do {
     enum C: CustomStringConvertible {
         case b, v, o
@@ -14,7 +14,7 @@ do {
         }
     }
 
-    func g(binding: PredicateTransition<C>.Binding) -> C {
+    func g(binding: PredicateTransition<C>.Binding) -> C { // Les fonctions
         switch binding["x"]! {
         case .b: return .v
         case .v: return .b
@@ -24,13 +24,13 @@ do {
 
     let t1 = PredicateTransition<C>(
         preconditions: [
-            PredicateArc(place: "p1", label: [.variable("x")]),
+            PredicateArc(place: "p1", label: [.variable("x")]), // [.variable("x")] est un multiset
         ],
         postconditions: [
-            PredicateArc(place: "p2", label: [.function(g)]),
+            PredicateArc(place: "p2", label: [.function(g)]), // Le label est sur la fonction g
         ])
 
-    let m0: PredicateNet<C>.MarkingType = ["p1": [.b, .b, .v, .v, .b, .o], "p2": []]
+    let m0: PredicateNet<C>.MarkingType = ["p1": [.b, .b, .v, .v, .b, .o], "p2": []] // Fabrication du marquage initial
     guard let m1 = t1.fire(from: m0, with: ["x": .b]) else {
         fatalError("Failed to fire.")
     }
@@ -48,4 +48,4 @@ do {
     for m in philosophers.simulation(from: philosophers.initialMarking!).prefix(10) {
         print(m)
     }
-}
+}		

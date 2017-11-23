@@ -25,7 +25,7 @@ extension PredicateNet {
 	var next = [PredicateMarkingNode<T>]() // C'est la liste des prochains elements que l'on va analyser
 	next.insert(m0, at:0) // Nous mettons m0 dans cette liste
 	var seen = [PredicateMarkingNode<T>]() // C'est la liste des elements que l'on a deja analyser
-  seen.insert(m0, at:0) // Nous mettons m0 dans cette liste
+	seen.insert(m0, at:0) // On met m0 dans cette liste
 	var tab_b = [PredicateTransition<T>.Binding]() // Ce sera pour les bindings
 
 	while !(next.isEmpty){ // Tant que la liste des elements a analyser n'est pas vide, on boucle
@@ -34,21 +34,20 @@ extension PredicateNet {
 
 		for oneTransition in self.transitions{ // Nous parcourons les transitions
 			tab_b = oneTransition.fireableBingings(from: mg!.marking) // On s'occupe des bindings
-      var newBinding : PredicateBindingMap<T> = [:] // On declare une variable de type PredicateBindingMap<T>
+			var newBinding : PredicateBindingMap<T> = [:] // On declare une variable du type PredicateBindingMap<T>
 
 			for one_b in tab_b{
 				if (oneTransition.fire(from: mg!.marking, with: one_b) != nil) { // Si le tir donne un resultat, on execute la suite
-          let newM = PredicateMarkingNode<T>(marking:oneTransition.fire(from: mg!.marking, with: one_b)! , successors:[:]) // Du meme type que m0
-
-					if (seen.contains(where: {PredicateNet.greater(newM.marking, $0.marking)}) == true){ // Dans le cas ou c'est dans la liste des marquages deja analyses
-            return nil
-          }
-          if (seen.contains(where: {PredicateNet.equals(newM.marking, $0.marking)}) == false){ // Dans le cas ou ce n'est pas dans la liste des marquages deja analyses
-            next.append(newM) // newM est place dans la liste des elements a analyser
-            seen.append(newM) // On met newM dans la liste des elements deja analyses
-            newBinding[one_b] = newM
-            mg!.successors.updateValue(newBinding, forKey: oneTransition) // On met a jour les successeurs de mg grace a updateValue()
-          }
+					let newM = PredicateMarkingNode<T>(marking:oneTransition.fire(from: mg!.marking, with: one_b)! , successors:[:]) // De meme type que m0
+					if (seen.contains(where: {PredicateNet.greater(newM.marking, $0.marking)}) == true){ // Dans le cas ou c'est dans la liste des marquages deja analyse
+					return nil
+					}
+					if (seen.contains(where: {PredicateNet.equals(newM.marking, $0.marking)}) == false){ // Dans le cas ou ce n'est pas dans la liste des marquages deja analyses
+						next.append(newM) // newM est place dans la liste des elements a analyser
+						seen.append(newM) // On met newM dans la liste des elements deja analyses
+						newBinding[one_b] = newM
+						mg!.successors.updateValue(newBinding, forKey: oneTransition) // On met a jour les successeurs de mg grace a updateValue()
+					}
 				}
 			}
 		}

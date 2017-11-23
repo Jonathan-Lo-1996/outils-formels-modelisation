@@ -40,7 +40,7 @@ extension PredicateNet {
 				if (oneTransition.fire(from: mg!.marking, with: one_b) != nil) { // Si le tir donne un resultat, on execute la suite
 					let newM = PredicateMarkingNode<T>(marking:oneTransition.fire(from: mg!.marking, with: one_b)! , successors:[:]) // De meme type que m0
 					if (seen.contains(where: {PredicateNet.greater(newM.marking, $0.marking)}) == true){ // Dans le cas ou c'est dans la liste des marquages deja analyse
-					return nil
+						return nil
 					}
 					if (seen.contains(where: {PredicateNet.equals(newM.marking, $0.marking)}) == false){ // Dans le cas ou ce n'est pas dans la liste des marquages deja analyses
 						next.append(newM) // newM est place dans la liste des elements a analyser

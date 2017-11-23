@@ -59,7 +59,7 @@ do {
         print(m)
     }
 	let markingGraph = philosophers.markingGraph(from: philosophers.initialMarking!)
-  print("Le nombre de marquages posssibles dans le modele des philosophes non blocable a 3 philosphes est :",markingGraph!.count)
+	print("Le nombre de marquages posssibles dans le modele des philosophes non blocable a 3 philosphes est :",markingGraph!.count)
 }
 print()
 

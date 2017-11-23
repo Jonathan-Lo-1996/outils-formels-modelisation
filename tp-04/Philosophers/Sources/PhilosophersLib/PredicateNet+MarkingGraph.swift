@@ -47,6 +47,13 @@ extension PredicateNet {
 						seen.append(newM) // On met newM dans la liste des elements deja analyses
 						newBinding[one_b] = newM
 						mg!.successors.updateValue(newBinding, forKey: oneTransition) // On met a jour les successeurs de mg grace a updateValue()
+					}else{ // Dans le cas ou c'est dans la liste des marquages deja analyses
+						for elem in seen{ // On parcourt les elements deja analyses
+							if PredicateNet.equals( elem.marking, newM.marking) == true{
+								newBinding[one_b] = elem
+								mg!.successors.updateValue(newBinding, forKey: oneTransition) // Mise a jour de successors
+							}
+						}
 					}
 				}
 			}

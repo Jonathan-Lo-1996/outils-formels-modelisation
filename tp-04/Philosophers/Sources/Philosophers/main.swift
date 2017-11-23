@@ -58,8 +58,8 @@ do {
     for m in philosophers.simulation(from: philosophers.initialMarking!).prefix(10) {
         print(m)
     }
-	let markingGraph = philosophers.markingGraph(from: philosophers.initialMarking!)
-	print("Le nombre de marquages posssibles dans le modele des philosophes non blocable a 3 philosphes est :",markingGraph!.count)
+    let markingGraph = philosophers.markingGraph(from: philosophers.initialMarking!)
+    print("Le nombre de marquages posssibles dans le modele des philosophes non blocable a 3 philosphes est :",markingGraph!.count)
 }
 print()
 
@@ -102,13 +102,8 @@ do {
     print("QUESTION 3")
     for element in markingGraph_lockable! {
       if (element.successors.count == 0){ // Si le nombre de successeurs est egal a 0
-        print(element.marking)
-      }
-    }
-    print("Voici un exemple d'etat ou le reseau est bloque dans le modele des philosophes bloquable a 5 philosophes :")
-    for el in markingGraph_lockable! {
-      if (el.successors.count == 0){ // Si le nombre de successeurs est egal a 0
-        print(el.marking)
+        print("Voici un exemple d'etat ou le reseau est bloque dans le modele des philosophes bloquable a 5 philosophes :")
+        print(element.marking) // On affiche
         break
       }
     }

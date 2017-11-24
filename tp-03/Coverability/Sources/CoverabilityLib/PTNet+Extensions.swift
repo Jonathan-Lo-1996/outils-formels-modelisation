@@ -2,8 +2,15 @@ import PetriKit
 
 public extension PTNet {
 
+    /// Computes the coverability graph of this P/T-net, starting from the given marking.
+    ///
+    /// Implementation note:
+    /// It is easier to build the coverability graph in a recursive depth-first manner than with
+    /// stacks, because we need to keep track of predecessor nodes as we process new ones. That's
+    /// why the algorithm is actually implemented in `computeSuccessors(of:_:_:)`.
     public func coverabilityGraph(from marking: CoverabilityMarking) -> CoverabilityGraph {
-        // Write here the implementation of the coverability graph generation.
+        // Create the initial node of the coverability graph.
+        let initialNode = CoverabilityGraph(marking: marking)
 
 	// La fonction prend en parametre marking qui est de type CoverabilityMarking et retourne un resultat de type CoverabilityGraph.
 
@@ -19,11 +26,11 @@ public extension PTNet {
 		// Ajout a la liste des elements deja visite :
 		seen.append(mg!)
 		let converted = FromCoverabilityMarkingToPTMarking(from: mg!.marking) // Nous effectuons la conversion
-		
+
 		// Parcours des transitions :
 		for oneTransition in self.transitions {
 			// Teste si la transition est tirable :
-			if (oneTransition.fire(from: converted)) != nil { 
+			if (oneTransition.fire(from: converted)) != nil {
 				var converted2 = FromPTMarkingToCoverabilityMarking(from: oneTransition.fire(from: converted)!) // Nous effectuons une conversion
 				for element in m0{
 					if converted2 > element.marking{
@@ -38,18 +45,18 @@ public extension PTNet {
 				if seen.contains(where: {$0.marking == converted2}){
 					// Mise a jour des successors :
 					mg!.successors[oneTransition]=seen.first(where: {$0.marking == converted2})
-				
-				
+
+
 				}else if next.contains(where: {$0.marking == converted2}){
 					// Mise a jour des successors :
 					mg!.successors[oneTransition] = next.first(where: {$0.marking == converted2})
-					
+
 				}else{
 					let mg2 = CoverabilityGraph(marking: converted2)
 					next.append(mg2) // Mise a jour de next
 					mg!.successors[oneTransition] = mg2 // Mise a jour des successeurs
 				}
-				 
+
 			}
 		}
 	}
@@ -71,7 +78,7 @@ public extension PTNet {
         if marking[onePlace]! < 300 {
 		cov[onePlace] = .some(marking[onePlace]!) // On est dans le cas ou ce n'est pas superieur
         }else{
-		
+
 		cov[onePlace] = .omega // Affectation de omega dans ce cas
         }
       }

@@ -79,7 +79,7 @@ public enum Formula {
     public var dnf: Formula {
         // Write your code here ...
 
-        let proposition_NNF = self.nnf // On applique NNF a la proposition pour enlever les implications et pour s'occuper des negations
+        let proposition_NNF = self.nnf // On applique NNF a la proposition pour eliminer les implications et pour s'occuper des negations
 
         switch proposition_NNF{
 
@@ -90,7 +90,7 @@ public enum Formula {
           return (!a).nnf // On retourne la meme proposition sous forme NNF
 
         case .disjunction(let b, let c):
-          return b.dnf || c.dnf // Si c'est une disjonction, on applique DNF a gauche et a droite
+          return b.dnf || c.dnf // Si c'est une disjonction, on applique dnf a gauche et dnf a droite
 
         case .conjunction(let b, let c):
           switch b.dnf{ // A gauche du &&
@@ -117,7 +117,7 @@ public enum Formula {
           case .implication(_,_):
             break
           }
-          return proposition_NNF // On retourne la meme proposition si on ne peut pas developper
+          return proposition_NNF // On retourne la meme proposition sous forme NNF si on n'est dans aucun des cas
 
         case .implication(_,_):
           return proposition_NNF
@@ -129,7 +129,7 @@ public enum Formula {
     public var cnf: Formula {
         // Write your code here ...
 
-        let proposition_NNF = self.nnf // Nous appliquons la NNF sur la proposition
+        let proposition_NNF = self.nnf // Nous appliquons la NNF a la proposition pour eliminer les implications et pour s'occuper des negations
 
         switch proposition_NNF{
 
@@ -140,16 +140,16 @@ public enum Formula {
           return (!a).nnf // Retourne la meme proposition sous forme NNF
 
         case .conjunction(let b, let c):
-          return (b.cnf && c.cnf) // Si c'est une conjonction, on applique cnf a gauche et a droite
+          return (b.cnf && c.cnf) // Si c'est une conjonction, on applique cnf a gauche et cnf a droite
 
-        case .disjunction(let b, let c): // Si c'est une disjonction, il faudra developper
+        case .disjunction(let b, let c):
           switch b.cnf{ // A gauche du ||
           case .proposition(_):
             break
           case .negation(_):
             break
           case .conjunction(let d, let e):
-            return ((d.cnf || c.cnf) && (e.cnf || c.cnf)).cnf // On developpe selon la regle
+            return ((d.cnf || c.cnf) && (e.cnf || c.cnf)).cnf // On applique la regle pour developper la proposition
           case .disjunction(_,_):
             break
           case .implication(_,_):
@@ -162,13 +162,13 @@ public enum Formula {
           case .negation(_):
             break
           case .conjunction(let d, let e):
-            return ((b.cnf || d.cnf) && (b.cnf || e.dnf)).cnf // On developpe selon la regle
+            return ((b.cnf || d.cnf) && (b.cnf || e.dnf)).cnf // On applique la regle pour developper la proposition
           case .disjunction(_,_):
             break
           case .implication(_,_):
             break
           }
-          return proposition_NNF // On retourne la meme proposition si on ne peut pas developper
+          return proposition_NNF // On retourne la meme proposition sous forme NNF si on n'est dans aucun des cas
 
         case .implication(_,_):
           return proposition_NNF

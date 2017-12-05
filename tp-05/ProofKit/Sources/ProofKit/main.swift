@@ -17,11 +17,11 @@ let f = a && b
 
 print(f)
 
-// Testons nos fonctions CNF et DNF :
+// Testons nos implementations du cnf et du dnf :
 print()
-print("Testons nos fonctions CNF et DNF : ")
+print("Testons nos implementations du cnf et du dnf : ")
 
-print("La proposition a testee est : ")
+print("La proposition a tester est : ")
 let f_test_1 = (!d) || ((a || b) && (c || g))
 print(f_test_1)
 print("La proposition sous forme CNF est : ")
@@ -30,7 +30,7 @@ print("La proposition sous forme DNF est : ")
 print(f_test_1.dnf)
 print()
 
-print("La proposition a testee est : ")
+print("La proposition a tester est : ")
 let f_test_2 = (a || d) && (c || !(b || g))
 print(f_test_2)
 print("La proposition sous forme CNF est : ")
@@ -39,8 +39,7 @@ print("La proposition sous forme DNF est : ")
 print(f_test_2.dnf)
 print()
 
-print("La proposition a testee est : ")
-//let f_test_3 = (a => (b && (c || (d => e)))) && (ff || (g && h))
+print("La proposition a tester est : ")
 let f_test_3 = (a || d) => c
 print(f_test_3)
 print("La proposition sous forme CNF est : ")

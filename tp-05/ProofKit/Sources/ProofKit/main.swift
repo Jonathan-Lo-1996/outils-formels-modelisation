@@ -1,10 +1,55 @@
 import ProofKitLib
 
+// Nom : Jonathan Lo
+// Cours : Outils Formels De Modelisation
+// tp-05
+// Date : Decembre 2017
+
 let a: Formula = "a"
 let b: Formula = "b"
+let c: Formula = "c"
+let d: Formula = "d"
+let e: Formula = "e"
+let ff: Formula = "ff"
+let g: Formula = "g"
+let h: Formula = "h"
 let f = a && b
 
 print(f)
+
+// Testons nos fonctions CNF et DNF :
+print()
+print("Testons nos fonctions CNF et DNF : ")
+
+print("La proposition a testee est : ")
+let f_test_1 = (!d) || ((a || b) && (c || g))
+print(f_test_1)
+print("La proposition sous forme CNF est : ")
+print(f_test_1.cnf)
+print("La proposition sous forme DNF est : ")
+print(f_test_1.dnf)
+print()
+
+print("La proposition a testee est : ")
+let f_test_2 = (a || d) && (c || !(b || g))
+print(f_test_2)
+print("La proposition sous forme CNF est : ")
+print(f_test_2.cnf)
+print("La proposition sous forme DNF est : ")
+print(f_test_2.dnf)
+print()
+
+print("La proposition a testee est : ")
+//let f_test_3 = (a => (b && (c || (d => e)))) && (ff || (g && h))
+let f_test_3 = (a || d) => c
+print(f_test_3)
+print("La proposition sous forme CNF est : ")
+print(f_test_3.cnf)
+print("La proposition sous forme DNF est : ")
+print(f_test_3.dnf)
+print()
+
+
 
 let booleanEvaluation = f.eval { (proposition) -> Bool in
     switch proposition {

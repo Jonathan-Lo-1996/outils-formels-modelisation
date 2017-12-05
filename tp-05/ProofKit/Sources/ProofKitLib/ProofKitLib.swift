@@ -1,5 +1,10 @@
 infix operator =>: LogicalDisjunctionPrecedence
 
+// Nom : Jonathan Lo
+// Cours : Outils Formels De Modelisation
+// tp-05
+// Date : Decembre 2017
+
 public protocol BooleanAlgebra {
 
     static prefix func ! (operand: Self) -> Self
@@ -73,13 +78,103 @@ public enum Formula {
     /// The disjunctive normal form of the formula.
     public var dnf: Formula {
         // Write your code here ...
-        return self
+
+        let proposition_NNF = self.nnf // On applique NNF a la proposition pour enlever les implications et pour s'occuper des negations
+
+        switch proposition_NNF{
+
+        case .proposition(_):
+          return proposition_NNF // On retourne la meme proposition sous forme NNF
+
+        case .negation(let a):
+          return (!a).nnf // On retourne la meme proposition sous forme NNF
+
+        case .disjunction(let b, let c):
+          return b.dnf || c.dnf // Si c'est une disjonction, on applique DNF a gauche et a droite
+
+        case .conjunction(let b, let c):
+          switch b.dnf{ // A gauche du &&
+          case .proposition(_):
+            break
+          case .negation(_):
+            break
+          case .conjunction(_,_):
+            break
+          case .disjunction(let d, let e):
+            return ((d.dnf && c.dnf) || (e.dnf && c.dnf)).dnf // On applique la regle pour developper la proposition
+          case .implication(_,_):
+            break
+          }
+          switch c.dnf{ // A droite du &&
+          case .proposition(_):
+            break
+          case .negation(_):
+            break
+          case .conjunction(_,_):
+            break
+          case .disjunction(let d, let e):
+            return ((b.dnf && d.dnf) || (b.dnf && e.dnf)).dnf // On applique la regle pour developper la proposition
+          case .implication(_,_):
+            break
+          }
+          return proposition_NNF // On retourne la meme proposition si on ne peut pas developper
+
+        case .implication(_,_):
+          return proposition_NNF
+
+        }
     }
 
     /// The conjunctive normal form of the formula.
     public var cnf: Formula {
         // Write your code here ...
-        return self
+
+        let proposition_NNF = self.nnf // Nous appliquons la NNF sur la proposition
+
+        switch proposition_NNF{
+
+        case .proposition(_):
+          return proposition_NNF // Retourne la meme proposition sous forme NNF
+
+        case .negation(let a):
+          return (!a).nnf // Retourne la meme proposition sous forme NNF
+
+        case .conjunction(let b, let c):
+          return (b.cnf && c.cnf) // Si c'est une conjonction, on applique cnf a gauche et a droite
+
+        case .disjunction(let b, let c): // Si c'est une disjonction, il faudra developper
+          switch b.cnf{ // A gauche du ||
+          case .proposition(_):
+            break
+          case .negation(_):
+            break
+          case .conjunction(let d, let e):
+            return ((d.cnf || c.cnf) && (e.cnf || c.cnf)).cnf // On developpe selon la regle
+          case .disjunction(_,_):
+            break
+          case .implication(_,_):
+            break
+          }
+
+          switch c.cnf{ // A droite du ||
+          case .proposition(_):
+            break
+          case .negation(_):
+            break
+          case .conjunction(let d, let e):
+            return ((b.cnf || d.cnf) && (b.cnf || e.dnf)).cnf // On developpe selon la regle
+          case .disjunction(_,_):
+            break
+          case .implication(_,_):
+            break
+          }
+          return proposition_NNF // On retourne la meme proposition si on ne peut pas developper
+
+        case .implication(_,_):
+          return proposition_NNF
+
+
+        }
     }
 
     /// The propositions the formula is based on.

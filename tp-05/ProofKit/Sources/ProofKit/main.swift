@@ -17,7 +17,7 @@ let f = a && b
 
 print(f)
 
-// Testons nos implementations du cnf et du dnf :
+// Testons maintenant nos implementations du cnf et du dnf :
 print()
 print("Testons nos implementations du cnf et du dnf : ")
 

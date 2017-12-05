@@ -140,7 +140,7 @@ public enum Formula {
           return (!a).nnf // Retourne la meme proposition sous forme NNF
 
         case .conjunction(let b, let c):
-          return (b.cnf && c.cnf) // Si c'est une conjonction, on applique cnf a gauche et cnf a droite
+          return b.cnf && c.cnf // Si c'est une conjonction, on applique cnf a gauche et cnf a droite
 
         case .disjunction(let b, let c):
           switch b.cnf{ // A gauche du ||

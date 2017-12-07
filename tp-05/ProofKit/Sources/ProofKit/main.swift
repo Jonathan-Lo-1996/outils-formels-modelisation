@@ -1,5 +1,6 @@
 import ProofKitLib
 
+
 // Nom : Jonathan Lo
 // Cours : Outils Formels De Modelisation
 // tp-05
@@ -17,7 +18,7 @@ let f = a && b
 
 print(f)
 
-// Testons maintenant nos implementations du cnf et du dnf :
+// Maintenant testons nos implementations du cnf et du dnf :
 print()
 print("Testons nos implementations du cnf et du dnf : ")
 

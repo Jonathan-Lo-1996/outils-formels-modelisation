@@ -162,7 +162,7 @@ public enum Formula {
           case .negation(_):
             break
           case .conjunction(let d, let e):
-            return ((b.cnf || d.cnf) && (b.cnf || e.dnf)).cnf // On applique la regle pour developper la proposition
+            return ((b.cnf || d.cnf) && (b.cnf || e.cnf)).cnf // On applique la regle pour developper la proposition
           case .disjunction(_,_):
             break
           case .implication(_,_):
